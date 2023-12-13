@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:product/config/git_it.dart';
 import 'package:product/model/base/product_model.dart';
+import 'package:product/screen/animation_screen.dart';
 import 'package:product/server/product_server.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProductScreen extends StatelessWidget {
-  const ProductScreen({Key? key}) : super(key: key);
+  ProductScreen({Key? key}) : super(key: key);
+
+  TextEditingController productController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -89,6 +94,7 @@ class ProductScreen extends StatelessWidget {
                           width: 275,
                           height: 50,
                           child: TextField(
+                            controller: productController,
                             decoration: InputDecoration(
                               prefix: Icon(Icons.search_rounded),
                               border: OutlineInputBorder(
@@ -99,7 +105,14 @@ class ProductScreen extends StatelessWidget {
                         ),
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          config.get<SharedPreferences>().setString(
+                              "last input", productController.text.toString());
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => AnimationScreen()));
+                        },
                         child: Padding(
                           padding: const EdgeInsets.only(left: 8.0, right: 16),
                           child: Container(

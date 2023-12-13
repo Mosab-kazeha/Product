@@ -1,4 +1,8 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
+import 'package:product/config/git_it.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AnimationScreen extends StatefulWidget {
   const AnimationScreen({Key? key}) : super(key: key);
@@ -32,27 +36,33 @@ class _AnimationScreenState extends State<AnimationScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: AnimatedBuilder(
-        builder: (context, _) {
-          return Center(
-            child: IconButton(
-              iconSize: sequence.value,
-              onPressed: () {
-                if (!isFavorite) {
-                  controller.forward();
-                } else {
-                  controller.reverse();
-                }
-                isFavorite = !isFavorite;
-              },
-              icon: Icon(
-                Icons.favorite,
-                color: color.value,
-              ),
-            ),
-          );
-        },
-        animation: controller,
+      body: Column(
+
+        children: [
+          Center(child: Text(config.get<SharedPreferences>().getString('userName')!),),
+          AnimatedBuilder(
+            builder: (context, _) {
+              return Center(
+                child: IconButton(
+                  iconSize: sequence.value,
+                  onPressed: () {
+                    if (!isFavorite) {
+                      controller.forward();
+                    } else {
+                      controller.reverse();
+                    }
+                    isFavorite = !isFavorite;
+                  },
+                  icon: Icon(
+                    Icons.favorite,
+                    color: color.value,
+                  ),
+                ),
+              );
+            },
+            animation: controller,
+          ),
+        ],
       ),
     );
   }
