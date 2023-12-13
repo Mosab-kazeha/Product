@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:product/screen/home_screen.dart';
 import 'package:product/screen/product_screen.dart';
 
 void main() {
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: ProductScreen(),
+      home: HomeScreen(),
     );
   }
 }

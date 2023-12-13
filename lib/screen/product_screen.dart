@@ -230,7 +230,7 @@ class ProductScreen extends StatelessWidget {
                       },
                       itemCount: result.length,
                     ),
-                  )
+                  ),
                 ],
               );
             } else {
